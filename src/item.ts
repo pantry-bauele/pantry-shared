@@ -5,7 +5,7 @@ export type VendorPrice = {
     price: number;
 };
 
-type ItemSize = {
+export type ItemSize = {
     amount: number;
     unit: string;
 };
