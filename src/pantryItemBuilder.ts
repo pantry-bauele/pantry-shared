@@ -34,7 +34,7 @@ export class PantryItemBuilder {
 
         if (object.availableQuantity) {
             pantryItem.setAvailableQuantity(
-                object.availableQuantity.quantity,
+                object.availableQuantity.amount,
                 object.availableQuantity.unit
             );
         }
