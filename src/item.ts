@@ -71,6 +71,14 @@ export class Item {
     }
 
     setServingSize(quantity: number, unit: string) {
+        // If unit is unset, then just set the object's
+        // serving size to the default value and skip
+        // over the error checking.
+        if (unit === '') {
+            this.servingSize = { amount: -1, unit: '' };
+            return;
+        }
+
         if (quantity <= 0) {
             throw new Error('Cannot set quantity to a negative or 0 value');
         }
@@ -87,6 +95,14 @@ export class Item {
     }
 
     setTotalQuantity(quantity: number, unit: string) {
+        // If unit is unset, then just set the object's
+        // serving size to the default value and skip
+        // over the error checking.
+        if (unit === '') {
+            this.totalQuantity = { amount: -1, unit: '' };
+            return;
+        }
+
         if (quantity <= 0) {
             throw new Error('Cannot set quantity to a negative or 0 value');
         }
@@ -103,6 +119,14 @@ export class Item {
     }
 
     setCalories(calories: number) {
+        // If calories is -1, then just set the object's
+        // calories to the default value and skip
+        // over the error checking.
+        if (calories === -1) {
+            this.calories = -1;
+            return;
+        }
+
         if (calories <= 0) {
             throw new Error('Cannot set calories to negative or 0 value');
         }

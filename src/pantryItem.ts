@@ -16,6 +16,14 @@ export class PantryItem {
     }
 
     setAvailableQuantity(quantity: number, unit: string) {
+        // If unit is unset, then just set the object's
+        // serving size to the default value and skip
+        // over the error checking.
+        if (unit === '') {
+            this.availableQuantity = { amount: -1, unit: '' };
+            return;
+        }
+
         if (quantity <= 0) {
             throw new Error('Cannot set quantity to a negative or 0 value');
         }
