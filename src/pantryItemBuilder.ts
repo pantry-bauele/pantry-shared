@@ -30,7 +30,7 @@ export class PantryItemBuilder {
 
         if (object.expirationDate) {
             let date: Date;
-            date = object.expirationDate;
+            date = new Date(object.expirationDate);
 
             pantryItem.setExpirationDate(
                 date.getFullYear(),
