@@ -28,9 +28,15 @@ export class PantryItemBuilder {
             pantryItem.setId(object.id ? object.id : object._id);
         }
 
-        // Logic behind this is currently broken, leave commented out for now
         if (object.expirationDate) {
-            //pantryItem.setExpirationDate())
+            let date: Date;
+            date = object.expirationDate;
+
+            pantryItem.setExpirationDate(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate()
+            );
         }
 
         if (object.availableQuantity) {
