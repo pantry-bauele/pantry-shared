@@ -2,6 +2,7 @@ import { Item, ItemSize } from './item';
 import { validMeasurementUnit } from './measurementUnits';
 
 export class PantryItem {
+    id = '';
     item = new Item();
 
     availableQuantity: ItemSize = { amount: -1, unit: '' };
@@ -13,6 +14,14 @@ export class PantryItem {
 
     getBaseItem() {
         return this.item;
+    }
+
+    setId(id: string) {
+        this.id = id;
+    }
+
+    getId() {
+        return this.id;
     }
 
     setAvailableQuantity(quantity: number, unit: string) {

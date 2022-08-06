@@ -25,9 +25,10 @@ export class PantryItemBuilder {
         // An object that is retrieved from the database will be
         // an that has the _id field set instead of id.
         if (object.id || object._id) {
-            //pantryItem.setId(object.id ? object.id : object._id);
+            pantryItem.setId(object.id ? object.id : object._id);
         }
 
+        // Logic behind this is currently broken, leave commented out for now
         if (object.expirationDate) {
             //pantryItem.setExpirationDate())
         }
