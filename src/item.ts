@@ -6,7 +6,7 @@ export type VendorPrice = {
 };
 
 export type ItemSize = {
-    amount: number;
+    amount: number | null;
     unit: string;
 };
 
@@ -14,11 +14,11 @@ export class Item {
     id = '';
     name = '';
     brand = '';
-    calories = -1;
+    calories: number | null = null;
     vendorPrices: VendorPrice[] = [];
 
-    totalQuantity: ItemSize = { amount: -1, unit: '' };
-    servingSize: ItemSize = { amount: -1, unit: '' };
+    totalQuantity: ItemSize = { amount: null, unit: '' };
+    servingSize: ItemSize = { amount: null, unit: '' };
 
     constructor() {}
 
@@ -75,7 +75,7 @@ export class Item {
         // serving size to the default value and skip
         // over the error checking.
         if (unit === '') {
-            this.servingSize = { amount: -1, unit: '' };
+            this.servingSize = { amount: null, unit: '' };
             return;
         }
 
@@ -99,7 +99,7 @@ export class Item {
         // serving size to the default value and skip
         // over the error checking.
         if (unit === '') {
-            this.totalQuantity = { amount: -1, unit: '' };
+            this.totalQuantity = { amount: null, unit: '' };
             return;
         }
 
@@ -119,16 +119,8 @@ export class Item {
     }
 
     setCalories(calories: number) {
-        // If calories is -1, then just set the object's
-        // calories to the default value and skip
-        // over the error checking.
-        if (calories === -1) {
-            this.calories = -1;
-            return;
-        }
-
-        if (calories <= 0) {
-            throw new Error('Cannot set calories to negative or 0 value');
+        if (calories < 0) {
+            throw new Error('Cannot set calories to negative value');
         }
 
         this.calories = calories;

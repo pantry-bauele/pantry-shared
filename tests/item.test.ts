@@ -1,6 +1,6 @@
 import { Item } from '../src/item';
 
-test('Item construction', async () => {
+test('Proper item construction', async () => {
     let newItem = new Item();
 
     newItem.setName('Hamburger');
@@ -95,15 +95,20 @@ test('Setting calories to item', () => {
 
     expect(() => {
         newItem.setCalories(-200);
-    }).toThrow('Cannot set calories to negative or 0 value');
+    }).toThrow('Cannot set calories to negative value');
 
     newItem.setCalories(300);
     expect(newItem.getCalories()).toBe(300);
     newItem.setCalories(700);
     expect(newItem.getCalories()).toBe(700);
+    newItem.setCalories(0);
+    expect(newItem.getCalories()).toBe(0);
+});
 
-    expect(() => {
-        newItem.setCalories(0);
-    }).toThrow('Cannot set calories to negative or 0 value');
-    expect(newItem.getCalories()).toBe(700);
+test('Verifying defaults on Item', () => {
+    let newItem = new Item();
+
+    expect(newItem.getCalories()).toBe(null);
+    expect(newItem.getTotalQuantity()).toEqual({ amount: null, unit: '' });
+    expect(newItem.getServingSize()).toEqual({ amount: null, unit: '' });
 });
