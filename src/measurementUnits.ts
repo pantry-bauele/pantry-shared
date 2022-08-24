@@ -25,6 +25,14 @@ let measurementUnits = [
     { label: 'imp tsp', type: 'volume', toMilliliters: 5.91939 },
 ];
 
+export function getMeasurementUnits(
+    type = 'all' || 'volume' || 'weight' || 'custom'
+) {
+    return type === 'all'
+        ? measurementUnits
+        : measurementUnits.filter((unit) => unit.type === type);
+}
+
 export function validMeasurementUnit(unit: string) {
     for (let i = 0; i < measurementUnits.length; i++) {
         if (unit === measurementUnits[i].label) {
