@@ -1,21 +1,36 @@
 import { getMeasurementUnits } from '../src/measurementUnits';
 
 test('measurementUnits get weight units', () => {
-    expect(getMeasurementUnits('weight')?.length === 8);
+    let measurementUnits = getMeasurementUnits('weight');
+
+    expect(measurementUnits).toBeTruthy();
+    expect(measurementUnits?.length).toEqual(8);
 });
 
 test('measurementUnits get volume units', () => {
-    expect(getMeasurementUnits('volume')?.length === 9);
+    let measurementUnits = getMeasurementUnits('volume');
+
+    expect(measurementUnits).toBeTruthy();
+    expect(measurementUnits?.length).toEqual(9);
 });
 
 test('measurementUnits get volume units', () => {
-    expect(getMeasurementUnits('custom')?.length === 1);
+    let measurementUnits = getMeasurementUnits('custom');
+
+    expect(measurementUnits).toBeTruthy();
+    expect(measurementUnits?.length).toEqual(1);
 });
 
 test('measurementUnits get volume units', () => {
-    expect(getMeasurementUnits('all')?.length === 14);
+    let measurementUnits = getMeasurementUnits('all');
+
+    expect(measurementUnits).toBeTruthy();
+    expect(measurementUnits?.length).toEqual(14);
 });
 
 test('measurementUnits get volume units', () => {
-    expect(getMeasurementUnits('unallowed') === null);
+    let measurementUnits = getMeasurementUnits('undefined');
+
+    expect(measurementUnits).toBeFalsy();
+    expect(measurementUnits?.length).toEqual(undefined);
 });

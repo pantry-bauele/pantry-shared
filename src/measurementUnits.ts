@@ -56,14 +56,14 @@ export function getMeasurementUnits(
     if (type === 'all') {
         return measurementUnits;
     } else if (type === 'volume' || type === 'weight') {
-        measurementUnits.filter(
+        return measurementUnits.filter(
             (unit) => unit.type === type || unit.type === 'volume-weight'
         );
     } else if (type === 'custom') {
-        measurementUnits.filter((unit) => unit.type === type);
-    } else {
-        return null;
+        return measurementUnits.filter((unit) => unit.type === type);
     }
+
+    return null;
 }
 
 export function validMeasurementUnit(unit: string) {
