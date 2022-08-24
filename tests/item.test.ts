@@ -105,10 +105,48 @@ test('Setting calories to item', () => {
     expect(newItem.getCalories()).toBe(0);
 });
 
+test('Setting serving size to item', () => {
+    let newItem = new Item();
+
+    expect(() => {
+        newItem.setServingSize(0, 'g');
+    }).toThrow('Cannot set quantity to a negative or 0 value');
+
+    expect(() => {
+        newItem.setServingSize(-1, 'g');
+    }).toThrow('Cannot set quantity to a negative or 0 value');
+
+    newItem.setServingSize(1, 'g');
+    expect(newItem.getServingSize()).toEqual({ amount: 1, unit: 'g' });
+
+    expect(() => {
+        newItem.setServingSize(12, '');
+    }).toThrow('Unit is invalid');
+});
+
+test('Setting total quantity to item', () => {
+    let newItem = new Item();
+
+    expect(() => {
+        newItem.setTotalQuantity(0, 'g');
+    }).toThrow('Cannot set quantity to a negative or 0 value');
+
+    expect(() => {
+        newItem.setTotalQuantity(-1, 'g');
+    }).toThrow('Cannot set quantity to a negative or 0 value');
+
+    newItem.setTotalQuantity(1, 'g');
+    expect(newItem.getTotalQuantity()).toEqual({ amount: 1, unit: 'g' });
+
+    expect(() => {
+        newItem.setTotalQuantity(12, '');
+    }).toThrow('Unit is invalid');
+});
+
 test('Verifying defaults on Item', () => {
     let newItem = new Item();
 
     expect(newItem.getCalories()).toBe(null);
-    expect(newItem.getTotalQuantity()).toEqual({ amount: null, unit: '' });
-    expect(newItem.getServingSize()).toEqual({ amount: null, unit: '' });
+    expect(newItem.getTotalQuantity()).toBe(null);
+    expect(newItem.getServingSize()).toBe(null);
 });

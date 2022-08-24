@@ -6,7 +6,7 @@ export type VendorPrice = {
 };
 
 export type ItemSize = {
-    amount: number | null;
+    amount: number;
     unit: string;
 };
 
@@ -17,10 +17,13 @@ export class Item {
     calories: number | null = null;
     vendorPrices: VendorPrice[] = [];
 
-    totalQuantity: ItemSize = { amount: null, unit: '' };
-    servingSize: ItemSize = { amount: null, unit: '' };
+    totalQuantity: ItemSize | null;
+    servingSize: ItemSize | null;
 
-    constructor() {}
+    constructor() {
+        this.totalQuantity = null;
+        this.servingSize = null;
+    }
 
     setId(id: string) {
         this.id = id;
@@ -74,11 +77,6 @@ export class Item {
         // If unit is unset, then just set the object's
         // serving size to the default value and skip
         // over the error checking.
-        if (unit === '') {
-            this.servingSize = { amount: null, unit: '' };
-            return;
-        }
-
         if (quantity <= 0) {
             throw new Error('Cannot set quantity to a negative or 0 value');
         }
@@ -95,14 +93,6 @@ export class Item {
     }
 
     setTotalQuantity(quantity: number, unit: string) {
-        // If unit is unset, then just set the object's
-        // serving size to the default value and skip
-        // over the error checking.
-        if (unit === '') {
-            this.totalQuantity = { amount: null, unit: '' };
-            return;
-        }
-
         if (quantity <= 0) {
             throw new Error('Cannot set quantity to a negative or 0 value');
         }
