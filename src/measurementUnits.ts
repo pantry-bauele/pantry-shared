@@ -11,11 +11,35 @@ let measurementUnits = [
     { label: 'us gal', type: 'volume', toMilliliters: 3785.41 },
     { label: 'us qt', type: 'volume', toMilliliters: 946.353 },
     { label: 'us pt', type: 'volume', toMilliliters: 473.176 },
-    { label: 'us cup', type: 'volume', toMilliliters: 240 },
-    { label: 'us oz', type: 'volume', toMilliliters: 29.5735 },
-    { label: 'us tbsp', type: 'volume', toMilliliters: 14.7868 },
-    { label: 'us tsp', type: 'volume', toMilliliters: 4.9289317406874 },
 
+    {
+        label: 'us cup',
+        type: 'volume-weight',
+        toMilliliters: 240,
+        toGrams: 250,
+    },
+    {
+        label: 'us oz',
+        type: 'volume-weight',
+        toMilliliters: 29.5735,
+        toGrams: 28.349,
+    },
+    {
+        label: 'us tbsp',
+        type: 'volume-weight',
+        toMilliliters: 14.7868,
+        toGrams: 14.78676,
+    },
+    {
+        label: 'us tsp',
+        type: 'volume-weight',
+        toMilliliters: 4.9289317406874,
+        toGrams: 4.92892,
+    },
+
+    { label: 'serving(s)', type: 'custom' },
+
+    /*
     { label: 'imp gal', type: 'volume', toMilliliters: 4546.09 },
     { label: 'imp qt', type: 'volume', toMilliliters: 1136.52 },
     { label: 'imp pt', type: 'volume', toMilliliters: 568.261 },
@@ -23,14 +47,23 @@ let measurementUnits = [
     { label: 'imp oz', type: 'volume', toMilliliters: 28.4131 },
     { label: 'imp tbsp', type: 'volume', toMilliliters: 17.7582 },
     { label: 'imp tsp', type: 'volume', toMilliliters: 5.91939 },
+    */
 ];
 
 export function getMeasurementUnits(
     type = 'all' || 'volume' || 'weight' || 'custom'
 ) {
-    return type === 'all'
-        ? measurementUnits
-        : measurementUnits.filter((unit) => unit.type === type);
+    if (type === 'all') {
+        return measurementUnits;
+    } else if (type === 'volume' || type === 'weight') {
+        measurementUnits.filter(
+            (unit) => unit.type === type || unit.type === 'volume-weight'
+        );
+    } else if (type === 'custom') {
+        measurementUnits.filter((unit) => unit.type === type);
+    } else {
+        return null;
+    }
 }
 
 export function validMeasurementUnit(unit: string) {

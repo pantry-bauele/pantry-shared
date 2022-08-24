@@ -1,21 +1,21 @@
 import { getMeasurementUnits } from '../src/measurementUnits';
 
 test('measurementUnits get weight units', () => {
-    expect(getMeasurementUnits('weight').length === 4);
+    expect(getMeasurementUnits('weight')?.length === 8);
 });
 
 test('measurementUnits get volume units', () => {
-    expect(getMeasurementUnits('volume').length === 16);
+    expect(getMeasurementUnits('volume')?.length === 9);
 });
 
 test('measurementUnits get volume units', () => {
-    expect(getMeasurementUnits('custom').length === 0);
+    expect(getMeasurementUnits('custom')?.length === 1);
 });
 
 test('measurementUnits get volume units', () => {
-    expect(getMeasurementUnits('all').length === 22);
+    expect(getMeasurementUnits('all')?.length === 14);
 });
 
 test('measurementUnits get volume units', () => {
-    expect(getMeasurementUnits('unallowed').length === 0);
+    expect(getMeasurementUnits('unallowed') === null);
 });
