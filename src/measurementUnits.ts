@@ -131,6 +131,21 @@ export function convertBaseUnitToOtherUnit(amount: number, newUnit: string) {
     return newAmount;
 }
 
+export function convertUnitToBaseUnit(amount: number, currentUnit: string) {
+    let newMeasurement = measurementUnits.find(
+        (unit) => unit.label === currentUnit
+    );
+
+    let newAmount;
+    if (newMeasurement?.toGrams) {
+        newAmount = amount * newMeasurement.toGrams;
+    } else if (newMeasurement?.toMilliliters) {
+        newAmount = amount * newMeasurement.toMilliliters;
+    }
+
+    return newAmount;
+}
+
 export function convertQuantityToBase(amount: number, unit: string) {
     let measurementType = getMeasurementType(unit);
     if (measurementType) {

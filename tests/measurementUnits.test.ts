@@ -1,5 +1,6 @@
 import {
     convertBaseUnitToOtherUnit,
+    convertUnitToBaseUnit,
     getMeasurementUnits,
 } from '../src/measurementUnits';
 
@@ -49,5 +50,19 @@ test('convert grams to unit', () => {
     );
     expect(convertBaseUnitToOtherUnit(34123, 'us cup')?.toFixed(0)).toEqual(
         '136'
+    );
+});
+
+test('convert unit to base', () => {
+    expect(convertUnitToBaseUnit(454, 'oz')?.toFixed(0)).toEqual('12871');
+    expect(convertUnitToBaseUnit(341, 'kg')?.toFixed(0)).toEqual('341000');
+    expect(convertUnitToBaseUnit(34123, 'lb')?.toFixed(0)).toEqual('15477920');
+
+    expect(convertUnitToBaseUnit(454, 'l')?.toFixed(0)).toEqual('454000');
+    expect(convertUnitToBaseUnit(12344, 'us gal')?.toFixed(0)).toEqual(
+        '56116935'
+    );
+    expect(convertUnitToBaseUnit(34123, 'us cup')?.toFixed(0)).toEqual(
+        '8073100'
     );
 });
