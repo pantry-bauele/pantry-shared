@@ -1,4 +1,7 @@
-import { getMeasurementUnits } from '../src/measurementUnits';
+import {
+    convertBaseUnitToOtherUnit,
+    getMeasurementUnits,
+} from '../src/measurementUnits';
 
 test('measurementUnits get weight units', () => {
     let measurementUnits = getMeasurementUnits('weight');
@@ -35,53 +38,16 @@ test('measurementUnits get volume units', () => {
     expect(measurementUnits?.length).toEqual(undefined);
 });
 
-/*
-test('compatible units', () => {
-    // Weight - weight
-    expect(compatibleUnits('oz', 'oz')).toBeTruthy();
+test('convert grams to unit', () => {
+    expect(convertBaseUnitToOtherUnit(454, 'oz')?.toFixed(0)).toEqual('16');
+    expect(convertBaseUnitToOtherUnit(341, 'kg')?.toFixed(3)).toEqual('0.341');
+    expect(convertBaseUnitToOtherUnit(34123, 'lb')?.toFixed(0)).toEqual('75');
 
-    // Weight - weight
-    expect(compatibleUnits('oz', 'g')).toBeTruthy();
-
-    // Weight - weight-volume
-    expect(compatibleUnits('oz', 'us tbsp')).toBeTruthy();
-
-    // Weight - weight-volume
-    expect(compatibleUnits('g', 'us tbsp')).toBeTruthy();
-
-    // Weight-volume - weight-volume
-    expect(compatibleUnits('us tbsp', 'us cup')).toBeTruthy();
-
-    // Volume - volume
-    expect(compatibleUnits('l', 'us gal')).toBeTruthy();
-
-    // Volume - volume
-    expect(compatibleUnits('ml', 'ml')).toBeTruthy();
-
-    // Volume - weight-volume
-    expect(compatibleUnits('ml', 'us cup')).toBeTruthy();
-
-    // Volume - weight-volume
-    expect(compatibleUnits('us qt', 'us tsp')).toBeTruthy();
-
-    // Weight - volume
-    expect(compatibleUnits('kg', 'ml')).toBeFalsy();
-
-    // Weight - volume
-    expect(compatibleUnits('g', 'us pt')).toBeFalsy();
-
-    // Serving - serving
-    expect(compatibleUnits('serving(s)', 'serving(s)')).toBeTruthy();
-
-    // Serving - weight
-    expect(compatibleUnits('serving(s)', 'g')).toBeFalsy();
-
-    // Volume - serving
-    expect(compatibleUnits('us gal', 'serving')).toBeFalsy();
+    expect(convertBaseUnitToOtherUnit(454, 'l')?.toFixed(3)).toEqual('0.454');
+    expect(convertBaseUnitToOtherUnit(12344, 'us gal')?.toFixed(1)).toEqual(
+        '3.3'
+    );
+    expect(convertBaseUnitToOtherUnit(34123, 'us cup')?.toFixed(0)).toEqual(
+        '136'
+    );
 });
-
-test('', () => {
-    expect(combineMeasurements(1, 'g', 1, 'g')).toBe(2);
-    expect(combineMeasurements(100, 'g', 1, 'oz')).toBe(128.3495);
-});
-*/

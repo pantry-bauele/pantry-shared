@@ -115,6 +115,22 @@ export function getMeasurementType(unit: string) {
     return null;
 }
 
+// Converts an amount specified in either grams or milliliters to some other unit.
+export function convertBaseUnitToOtherUnit(amount: number, newUnit: string) {
+    let newMeasurement = measurementUnits.find(
+        (unit) => unit.label === newUnit
+    );
+
+    let newAmount;
+    if (newMeasurement?.toGrams) {
+        newAmount = amount / newMeasurement.toGrams;
+    } else if (newMeasurement?.toMilliliters) {
+        newAmount = amount / newMeasurement.toMilliliters;
+    }
+
+    return newAmount;
+}
+
 export function convertQuantityToBase(amount: number, unit: string) {
     let measurementType = getMeasurementType(unit);
     if (measurementType) {
@@ -144,86 +160,3 @@ export function convertQuantityToBase(amount: number, unit: string) {
 
     return null;
 }
-
-/*
-export function compatibleUnits(unit1: string, unit2: string) {
-    let unit1Type = getMeasurementType(unit1);
-    let unit2Type = getMeasurementType(unit2);
-
-    if (
-        unit1Type === unit2Type ||
-        (unit1Type === 'volume-weight' &&
-            (unit2Type === 'weight' || 'volume')) ||
-        (unit2Type === 'volume-weight' && (unit1Type === 'weight' || 'volume)'))
-    ) {
-        return true;
-    }
-
-    return false;
-}
-
-export function combineMeasurements(
-    measurement1Quantity: number,
-    measurement1Unit: string,
-    measurement2Quantity: number,
-    measurement2Unit: string
-) {
-    if (!compatibleUnits(measurement1Unit, measurement2Unit)) {
-        return false;
-    }
-
-    if (measurement1Unit === measurement2Unit) {
-        return measurement1Quantity + measurement2Quantity;
-    }
-
-    let measurement1UnitType = getMeasurementType(measurement1Unit);
-    let measurement2UnitType = getMeasurementType(measurement2Unit);
-
-    // If either are weights, convert both to grams
-    if (
-        measurement1UnitType === 'weight' ||
-        measurement2UnitType === 'weight'
-    ) {
-        let measurement1Grams = toGrams(measurement1Quantity, measurement1Unit);
-        let measurement2Grams = toGrams(measurement2Quantity, measurement2Unit);
-
-        return measurement1Grams + measurement2Grams;
-    }
-
-    // If either are volumes, convert both to ml
-    if (
-        measurement1UnitType === 'volume' ||
-        measurement2UnitType === 'volume'
-    ) {
-        let measurement1Milliliters = toMilliliters(
-            measurement1Quantity,
-            measurement1Unit
-        );
-        let measurement2Milliliters = toMilliliters(
-            measurement2Quantity,
-            measurement2Unit
-        );
-
-        return measurement1Milliliters + measurement2Milliliters;
-    }
-
-    // If both are weight-volumes, convert both to grams
-    if (
-        measurement1UnitType === 'weight-volume' &&
-        measurement2UnitType === 'weight-volume'
-    ) {
-        let measurement1Grams = toGrams(measurement1Quantity, measurement1Unit);
-        let measurement2Grams = toGrams(measurement2Quantity, measurement2Unit);
-
-        return measurement1Grams + measurement2Grams;
-    }
-
-    // If both are custom, just combine normally
-    if (
-        measurement1UnitType === 'custom' &&
-        measurement2UnitType === 'custom'
-    ) {
-        return measurement1Quantity + measurement2Quantity;
-    }
-}
-*/
