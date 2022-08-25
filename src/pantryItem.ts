@@ -14,13 +14,13 @@ export class PantryItem {
     expirationDate = new Date(0);
 
     availableBaseQuantity: ItemSize | null;
-    availableBaseUnitType: MeasurementUnitTypes | null;
+    baseUnitType: MeasurementUnitTypes | null;
 
     constructor(item: Item) {
         this.item = item;
 
         this.availableBaseQuantity = null;
-        this.availableBaseUnitType = null;
+        this.baseUnitType = null;
 
         if (item.getTotalQuantity()?.unit) {
             let itemUnit = item.getTotalQuantity()?.unit;
@@ -28,7 +28,7 @@ export class PantryItem {
                 let itemUnitType = getMeasurementType(itemUnit);
 
                 if (itemUnitType) {
-                    this.availableBaseUnitType = itemUnitType;
+                    this.baseUnitType = itemUnitType;
 
                     let itemQuantityAmount = item.getTotalQuantity()?.amount;
                     let itemQuantityUnit = item.getTotalQuantity()?.unit;
@@ -44,12 +44,28 @@ export class PantryItem {
         }
     }
 
+    setAvailableBaseQuantity(quantity: number, unit: string) {
+        if (quantity <= 0) {
+            throw new Error('Cannot set quantity to a negative or 0 value');
+        }
+
+        if (!validMeasurementUnit(unit)) {
+            throw new Error('Unit is invalid');
+        }
+
+        this.availableBaseQuantity = { amount: quantity, unit: unit };
+    }
+
     getAvailableBaseQuantity() {
         return this.availableBaseQuantity;
     }
 
-    getAvailableBaseQuantityType() {
-        return this.availableBaseUnitType;
+    setBaseQuantityType(type: MeasurementUnitTypes) {
+        this.baseUnitType = type;
+    }
+
+    getBaseQuantityType() {
+        return this.baseUnitType;
     }
 
     getBaseItem() {
