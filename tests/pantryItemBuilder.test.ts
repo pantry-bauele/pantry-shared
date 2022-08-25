@@ -136,3 +136,27 @@ test('Build item with new stuff', async () => {
     expect(item.getTotalQuantity()).toEqual({ amount: 1233, unit: 'oz' });
     expect(item.getServingSize()).toEqual(null);
 });
+
+test('Build item with custom unit', async () => {
+    // JSON string needs to be changed to match what it would
+    // actually look like
+    let jsonString = `{"id":"","item":{"id":"630785fdc072b005f32c2612","name":"Bagel","brand":"Thomas","calories":280,"vendorPrices":[],"totalQuantity":{"amount":6,"unit":"serving(s)"},"servingSize":{"amount":95,"unit":"g"}},"expirationDate":"1970-01-01T00:00:00.000Z","availableBaseQuantity":null,"baseUnitType":"custom"}`;
+    let pantryItemBuilder = new PantryItemBuilder();
+    let pantryItem = pantryItemBuilder.buildItem(jsonString);
+    let item = pantryItem.getBaseItem();
+
+    expect(item.getId()).toBe('630785fdc072b005f32c2612');
+    expect(item.getName()).toBe('Bagel');
+    expect(item.getBrand()).toBe('Thomas');
+    expect(item.getCalories()).toBe(280);
+    expect(item.getTotalQuantity()).toEqual({ amount: 6, unit: 'serving(s)' });
+    expect(item.getServingSize()).toEqual({ amount: 95, unit: 'g' });
+
+    expect(pantryItem.getBaseQuantityType()).toBe('custom');
+    expect(pantryItem.getAvailableBaseQuantity()).toEqual({
+        amount: 6,
+        unit: 'serving(s)',
+    });
+});
+
+//{"id":"","item":{"id":"630785fdc072b005f32c2612","name":"Bagel","brand":"Thomas","calories":280,"vendorPrices":[],"totalQuantity":{"amount":6,"unit":"serving(s)"},"servingSize":{"amount":95,"unit":"g"}},"expirationDate":"1970-01-01T00:00:00.000Z","availableBaseQuantity":null,"baseUnitType":"custom"}

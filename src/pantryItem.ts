@@ -34,10 +34,17 @@ export class PantryItem {
                     let itemQuantityUnit = item.getTotalQuantity()?.unit;
 
                     if (itemQuantityAmount && itemQuantityUnit) {
-                        this.availableBaseQuantity = convertQuantityToBase(
-                            itemQuantityAmount,
-                            itemQuantityUnit
-                        );
+                        if (itemUnitType !== MeasurementUnitTypes.Custom) {
+                            this.availableBaseQuantity = convertQuantityToBase(
+                                itemQuantityAmount,
+                                itemQuantityUnit
+                            );
+                        } else {
+                            this.setAvailableBaseQuantity(
+                                itemQuantityAmount,
+                                itemQuantityUnit
+                            );
+                        }
                     }
                 }
             }
