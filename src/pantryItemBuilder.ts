@@ -40,12 +40,12 @@ export class PantryItemBuilder {
         }
 
         if (
-            object.availableBaseQuantity.amount &&
-            object.availableBaseQuantity.unit
+            object.availableBaseQuantity?.amount &&
+            object.availableBaseQuantity?.unit
         ) {
             pantryItem.setAvailableBaseQuantity(
-                object.availableQuantity.amount,
-                object.availableQuantity.unit
+                object.availableBaseQuantity.amount,
+                object.availableBaseQuantity.unit
             );
         }
 

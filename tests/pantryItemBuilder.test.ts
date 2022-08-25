@@ -119,3 +119,20 @@ test('Build item with proper string 4', async () => {
     expect(pantryItem.getExpirationDate().getMonth()).toEqual(date.getMonth());
     expect(pantryItem.getExpirationDate().getDate()).toEqual(date.getDate());
 });
+
+test('Build item with new stuff', async () => {
+    // JSON string needs to be changed to match what it would
+    // actually look like
+    let jsonString = `{"id":"","item":{"id":"6306dca5df9426252ac6695c","name":"Bagel","brand":"","calories":null,"vendorPrices":[],"totalQuantity":{"amount":1233,"unit":"oz"},"servingSize":null},"expirationDate":"1970-01-01T00:00:00.000Z","availableBaseQuantity":{"amount":34954.9335,"unit":"g"},"baseUnitType":"weight"}`;
+    let pantryItemBuilder = new PantryItemBuilder();
+    let pantryItem = pantryItemBuilder.buildItem(jsonString);
+    let item = pantryItem.getBaseItem();
+
+    expect(item.getId()).toBe('6306dca5df9426252ac6695c');
+    expect(item.getName()).toBe('Bagel');
+    expect(item.getBrand()).toBe('');
+    expect(item.getCalories()).toBe(null);
+
+    expect(item.getTotalQuantity()).toEqual({ amount: 1233, unit: 'oz' });
+    expect(item.getServingSize()).toEqual(null);
+});
