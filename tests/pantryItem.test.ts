@@ -112,54 +112,54 @@ test('PantryItem weight types', async () => {
     let newPantryItem9 = new PantryItem(newItem9);
     let newPantryItem10 = new PantryItem(newItem10);
 
-    expect(newPantryItem1.getAvailableBaseQuantityType()).toBe('weight');
+    expect(newPantryItem1.getBaseQuantityType()).toBe('weight');
     expect(newPantryItem1.getAvailableBaseQuantity()).toEqual({
         amount: 100,
         unit: 'g',
     });
 
-    expect(newPantryItem2.getAvailableBaseQuantityType()).toBe('weight');
+    expect(newPantryItem2.getBaseQuantityType()).toBe('weight');
     expect(newPantryItem2.getAvailableBaseQuantity()).toEqual({
         amount: 2834.95,
         unit: 'g',
     });
 
-    expect(newPantryItem3.getAvailableBaseQuantityType()).toBe('weight');
+    expect(newPantryItem3.getBaseQuantityType()).toBe('weight');
     expect(newPantryItem3.getAvailableBaseQuantity()).toEqual({
         amount: 45359.2,
         unit: 'g',
     });
 
-    expect(newPantryItem4.getAvailableBaseQuantityType()).toBe('weight');
+    expect(newPantryItem4.getBaseQuantityType()).toBe('weight');
     expect(newPantryItem4.getAvailableBaseQuantity()).toEqual({
         amount: 100000,
         unit: 'g',
     });
 
-    expect(newPantryItem5.getAvailableBaseQuantityType()).toBe('volume');
+    expect(newPantryItem5.getBaseQuantityType()).toBe('volume');
     expect(newPantryItem5.getAvailableBaseQuantity()).toEqual({
         amount: 100,
         unit: 'ml',
     });
 
-    expect(newPantryItem6.getAvailableBaseQuantityType()).toBe('volume');
+    expect(newPantryItem6.getBaseQuantityType()).toBe('volume');
     expect(newPantryItem6.getAvailableBaseQuantity()).toEqual({
         amount: 100000,
         unit: 'ml',
     });
 
-    expect(newPantryItem7.getAvailableBaseQuantityType()).toBe('volume');
+    expect(newPantryItem7.getBaseQuantityType()).toBe('volume');
     expect(newPantryItem7.getAvailableBaseQuantity()).toEqual({
         amount: 378541,
         unit: 'ml',
     });
 
-    expect(newPantryItem9.getAvailableBaseQuantityType()).toBe('volume-weight');
+    expect(newPantryItem9.getBaseQuantityType()).toBe('volume-weight');
     expect(newPantryItem9.getAvailableBaseQuantity()).toEqual({
         amount: 2834.9,
         unit: 'g',
     });
 
-    expect(newPantryItem10.getAvailableBaseQuantityType()).toBe('custom');
+    expect(newPantryItem10.getBaseQuantityType()).toBe('custom');
     expect(newPantryItem10.getAvailableBaseQuantity()).toEqual(null);
 });

@@ -1,8 +1,4 @@
-import {
-    getMeasurementUnits,
-    compatibleUnits,
-    combineMeasurements,
-} from '../src/measurementUnits';
+import { getMeasurementUnits } from '../src/measurementUnits';
 
 test('measurementUnits get weight units', () => {
     let measurementUnits = getMeasurementUnits('weight');
@@ -39,6 +35,7 @@ test('measurementUnits get volume units', () => {
     expect(measurementUnits?.length).toEqual(undefined);
 });
 
+/*
 test('compatible units', () => {
     // Weight - weight
     expect(compatibleUnits('oz', 'oz')).toBeTruthy();
@@ -87,3 +84,4 @@ test('', () => {
     expect(combineMeasurements(1, 'g', 1, 'g')).toBe(2);
     expect(combineMeasurements(100, 'g', 1, 'oz')).toBe(128.3495);
 });
+*/
