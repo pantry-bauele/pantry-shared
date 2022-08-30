@@ -4,13 +4,13 @@ test('Proper item construction', async () => {
     let newItem = new Item();
 
     newItem.setName('Hamburger');
-    newItem.setBrand('Great Value');
+    newItem.setBrand('MyBrand');
     newItem.addVendorPrice('ShopA', 3.45);
     newItem.addVendorPrice('ShopC', 5.3);
     newItem.setCalories(300);
 
     expect(newItem.getName()).toBe('Hamburger');
-    expect(newItem.getBrand()).toBe('Great Value');
+    expect(newItem.getBrand()).toBe('MyBrand');
     expect(newItem.getVendorPrices()).toEqual([
         { name: 'ShopA', price: 3.45 },
         { name: 'ShopC', price: 5.3 },
@@ -22,7 +22,7 @@ test('Proper item construction', async () => {
     expect(newItem.getServingSize()).toEqual({ amount: 90, unit: 'g' });
 });
 
-test('Removing price from item', async () => {
+test('Removing vendor price from item', async () => {
     let newItem = new Item();
     newItem.setName('Lettuce');
     newItem.addVendorPrice('ShopA', 3.45);
@@ -36,7 +36,7 @@ test('Removing price from item', async () => {
     expect(newItem.getVendorPrices()).toEqual([{ name: 'ShopC', price: 5.3 }]);
 });
 
-test('Removing invalid price from item', async () => {
+test('Removing invalid vendor price from item', async () => {
     let newItem = new Item();
     newItem.setName('Pasta');
     newItem.addVendorPrice('ShopB', 1.45);
@@ -66,7 +66,7 @@ test('Set invalid measurement unit', async () => {
     }).toThrow('Unit is invalid');
 });
 
-test('Adding prices to item', () => {
+test('Adding vendor prices to item', () => {
     let newItem = new Item();
 
     expect(() => {
@@ -143,7 +143,7 @@ test('Setting total quantity to item', () => {
     }).toThrow('Unit is invalid');
 });
 
-test('Verifying defaults on Item', () => {
+test('Testing defaults on Item', () => {
     let newItem = new Item();
 
     expect(newItem.getCalories()).toBe(null);
